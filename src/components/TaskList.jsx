@@ -3,8 +3,9 @@ import Task from './Task.jsx';
 import './TaskList.css';
 
 const TaskList = ({ tasks, onIsComplete, onRemove }) => {
-  const getTaskListJSX = (tasks) => {
-    return tasks.map((task) => (
+  // Create an array of Task components
+  const taskComponents = tasks.map((task) => {
+    return (
       <Task
         key={task.id}
         id={task.id}
@@ -13,10 +14,10 @@ const TaskList = ({ tasks, onIsComplete, onRemove }) => {
         onIsComplete={onIsComplete}
         onRemove={onRemove}
       />
-    ));
-  };
+    );
+  });
 
-  return <ul className="tasks__list no-bullet">{getTaskListJSX(tasks)}</ul>;
+  return <ul className="tasks__list no-bullet">{taskComponents}</ul>;
 };
 
 TaskList.propTypes = {
