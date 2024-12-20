@@ -125,7 +125,7 @@ function App (){
   const handleSubmit = (data) => {
     axios.post(`${kbaseURL}/tasks`, data)
       .then((result) => {
-        setTaskData((prevTask) => [convertFromApi(result.data), ...prevTask]);
+        setTaskData((prevTaskData) => [convertFromApi(result.data), ...prevTaskData]);
       })
       .catch((error) => console.log(error));
   };
