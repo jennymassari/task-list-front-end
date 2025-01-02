@@ -6,7 +6,7 @@ import NewTaskForm from './components/NewTaskForm';
 
 
 
-const kbaseURL = 'http://127.0.0.1:5500';
+const kbaseURL = 'http://127.0.0.1:5000';
 //const kbaseURL = 'http://localhost:5000';
 
 //function to match the case with backend
@@ -123,9 +123,12 @@ function App (){
   };
 
   const handleSubmit = (data) => {
+    // Make a POST request to the API to create a new task
     axios.post(`${kbaseURL}/tasks`, data)
       .then((result) => {
-        setTaskData((prevTaskData) => [convertFromApi(result.data), ...prevTaskData]);
+        // Add the new task to the list of tasks
+        setTaskData((prevTaskData) => [convertFromApi(result.data.task), ...prevTaskData]);
+        console.log(result);
       })
       .catch((error) => console.log(error));
   };

@@ -2,16 +2,18 @@
 import { useState } from 'react';
 
 const NewTaskForm = ({ handleSubmit }) => {
-  // const [name, setName] = useState('');
+  // Define the initial state of the form
   const kDefaultFromState = {
     title: '',
+    description: '',
     isComplete: 'no',
-};
+  };
+  // Define the form data state
   const [formData, setFormData] = useState(kDefaultFromState);
-  // const [name, setName] = useState('');
+
 
   const handleChange = event => {
-    //get the name or value of the field that changed
+    //get the name and value of the field that changed
 	  const fieldName = event.target.name;
 	  const fieldValue = event.target.value;
     //update the state with the new form data
@@ -32,7 +34,22 @@ const NewTaskForm = ({ handleSubmit }) => {
     <form onSubmit={onHandleSubmit}>
       <div>
         <label htmlFor="title"> Title:</label>
-        <input type="text" id="title" name="title" value={formData.title} onChange={handleChange}/>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}/>
+      </div>
+
+      <div>
+        <label htmlFor="description"> Description:</label>
+        <input
+          type="description"
+          id="description"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}/>
       </div>
 
       <div>
