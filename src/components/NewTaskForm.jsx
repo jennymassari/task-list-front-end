@@ -53,18 +53,6 @@ const NewTaskForm = ({ handleSubmit }) => {
       </div>
 
       <div>
-        <label htmlFor="isComplete">isComplete:</label>
-        <select
-          name="isComplete"
-          value={formData.isComplete}
-          onChange={handleChange}
-        >
-          <option value="no">No</option>
-          <option value="yes">Yes</option>
-        </select>
-      </div>
-
-      <div>
         <input type="submit" value="Add a task" />
       </div>
     </form>

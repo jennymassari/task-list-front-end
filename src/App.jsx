@@ -17,6 +17,7 @@ const convertFromApi = (apiTask) => {
   };
 
   delete newTask.completed_at;
+  // delete newTask.is_complete;
   return newTask;
 };
 
@@ -39,7 +40,7 @@ const getAllTasksApi = () => {
 const markTaskComplete = (id) => {
   return axios.patch(`${kbaseURL}/tasks/${id}/mark_complete`)
     .then( response => {
-      const newTask = convertFromApi(response.data);
+      const newTask = convertFromApi(response.data.task);
       return newTask;
     })
     .catch(error => {
@@ -50,7 +51,7 @@ const markTaskComplete = (id) => {
 const markTaskIncomplete = (id) => {
   return axios.patch(`${kbaseURL}/tasks/${id}/mark_incomplete`)
     .then( response => {
-      const newTask = convertFromApi(response.data);
+      const newTask = convertFromApi(response.data.task);
       return newTask;
     })
     .catch(error => {
@@ -95,7 +96,7 @@ function App (){
           : task
       )
     );
-// Update the backend after the UI update
+    // Update the backend after the UI update
     const updateTask = newIsComplete ? markTaskComplete(id) : markTaskIncomplete(id);
     updateTask
       .then((updatedTask) => {
@@ -113,12 +114,11 @@ function App (){
 
   // Handle removing a task
   const handleRemoveTask = (id) => {
-    // Optimistic UI update: Remove the task from the UI immediately
     setTaskData((taskData) => taskData.filter((task) => task.id !== id));
     deleteTaskApi(id)
       .catch((error) => {
         console.log('Error deleting task:', error);
-        getAllTasks(); // Re-fetch tasks in case of error to restore the previous state
+        getAllTasks();
       });
   };
 
